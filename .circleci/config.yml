@@ -11,7 +11,11 @@ jobs:
 
     steps:
       - checkout
-      - run: dir
-      - run: cd Src
-      - run: npm install
+      - run: 
+            name: Install Dependencies
+            command: |
+                echo 'Preparing to install dependencies'
+                cd Src
+                dir
+                npm install
       - run: npm test
