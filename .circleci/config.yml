@@ -7,14 +7,21 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.9.0
-
-    working_directory: ~/Src
+      
+    working_directory: ~/TestingProject/Src
 
     steps:
-      - checkout
+      - checkout:
+            path: ~/TestingProject
+      - restore_cache:
+            key: dependency-cache-{{ checksum "package-lock.json" }}
       - run: 
             name: Install Dependencies
             command: npm install
       - run: 
             name: Run Tests
             command: npm test
+      - save_cache:
+            key: dependency-cache-{{ checksum "package-lock.json" }}
+            paths:
+                - node_modules
