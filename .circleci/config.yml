@@ -6,16 +6,15 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/node:8.9.0
+
+    working_directory: ~/Src
 
     steps:
       - checkout
       - run: 
+            name: Install Dependencies
+            command: npm install
+      - run: 
             name: Run Tests
-            command: |
-                echo 'Preparing to install dependencies'
-                cd Src
-                npm install
-                echo 'Running tests'
-                npm test
+            command: npm test
