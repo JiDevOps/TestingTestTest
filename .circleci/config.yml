@@ -14,7 +14,7 @@ jobs:
       - checkout:
             path: ~/TestingProject
       - restore_cache:
-            key: dependency-cache-{{ checksum "package-lock.json" }}
+            key: v0-dependency-cache-{{ checksum "package-lock.json" }}
       - run: 
             name: Install Dependencies
             command: npm install
@@ -22,6 +22,6 @@ jobs:
             name: Run Tests
             command: npm test
       - save_cache:
-            key: dependency-cache-{{ checksum "package-lock.json" }}
+            key: v0-node-dependency-cache-{{ checksum "package-lock.json" }}
             paths:
                 - node_modules
